@@ -1,0 +1,26 @@
+<div class='container mt-3'>
+  <h2><%= @restaurant.name%> restaurant</h2>
+  <div class="mt-4">
+    <p><strong>Address: <%= @restaurant.address %><strong></p>
+    <p>Category: <%= @restaurant.category %></p>
+    <p>Phone Number: <%= @restaurant.phone_number %></p>
+  </div>
+  <%= link_to "Go back to all restaurants", restaurants_path, class: "btn btn-primary"%>
+  <div class='mt-5'>
+    <h3>Reviews:</h3>
+    <% @restaurant.reviews.each do |review| %>
+    <p>Review: <%= review.content %></p>
+    <p>Rating:<%= review.rating %></p>
+    <% end %>
+  </div>
+
+  <div class='mt-5'>
+    <h5>Create a new review about <%= @restaurant.name %> restaurant</h5>
+    <%= simple_form_for([@restaurant, @review]) do |f| %>
+      <%= f.input :content %>
+      <%= f.input :rating, collection: 0..5 %>
+      <%= f.submit %>
+    <% end %>
+  </div>
+
+</div>
